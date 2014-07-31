@@ -60,5 +60,3 @@ class SparkPi(sc: SparkContext, slices: Int = 1, num_samples: Int = 10000) {
     pi
   }
 }
-
-// vim: ft=scala tw=0 sw=2 ts=2 et
