@@ -37,11 +37,13 @@ class CountParamVals(sc: SparkContext,
                      reducers: Int = 40) extends Serializable {
 
   def exec(): RDD[(Option[String], Int)] = {
-    val rdda = sc.textFile(filepath)
-    val lines = rdda.filter(l => l.contains(filterString))
-    lines.map(l => Utils.regexer(l, this.pattern)).map((_, 1)).reduceByKey((a: Int, b: Int) => a+b, 10)
-    //Seq((Some("None"), 0))
+    val filepath_ = filepath
+    val filterString_ = filterString
+    val pattern_ = pattern
+    val reducers_ = reducers
+
+    val rdda = sc.textFile(filepath_)
+    val lines = rdda.filter(l => l.contains(filterString_))
+    lines.map(l => Utils.regexer(l, pattern_)).map((_, 1)).reduceByKey((a: Int, b: Int) => a+b, reducers)
   }
 }
-
-// vim: ft=scala tw=0 sw=2 ts=2 et
