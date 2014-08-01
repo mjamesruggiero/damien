@@ -12,7 +12,7 @@ class UtilsSpec extends FunSpec {
       assert(result == Some("quux"))
     }
 
-    it("returns None when there's a match"){
+    it("returns None when there's no match"){
       val pat = """.*baz=([^\&]+).*""".r
       val testString = "foo=bar&zed=quux"
       val result = Utils.regexer(testString, pat)
